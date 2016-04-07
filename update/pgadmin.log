@@ -1,0 +1,306 @@
+2015-12-09 17:06:39 ERROR  : ERROR:  schema "nssd" does not exist
+2015-12-09 17:13:22 ERROR  : ERROR:  schema "nssd" does not exist
+2015-12-09 17:17:14 ERROR  : ERROR:  schema "NSSD" already exists
+2015-12-09 17:17:37 ERROR  : ERROR:  schema "nssd" does not exist
+2015-12-09 17:17:43 ERROR  : ERROR:  schema "NSSD" already exists
+2015-12-10 08:58:24 ERROR  : ERROR:  schema "nssd" does not exist
+2015-12-10 08:58:34 ERROR  : ERROR:  schema "NSSD" already exists
+2015-12-10 09:51:33 ERROR  : ERROR:  schema "nssd" does not exist
+2015-12-10 11:54:47 ERROR  : ERROR:  schema "nssd" does not exist
+2015-12-10 11:55:17 ERROR  : ERROR:  schema "nssd" does not exist
+2015-12-10 11:55:37 ERROR  : ERROR:  syntax error at or near "USE"
+LINE 1: USE NSSD;
+        ^
+2015-12-10 11:57:13 ERROR  : ERROR:  cannot drop schema NSSD because other objects depend on it
+DETAIL:  table "NSSD".ns_gelearning_course_mapping depends on schema NSSD
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2015-12-14 12:19:19 ERROR  : ERROR:  syntax error at or near "."
+LINE 21: CREATE INDEX NSSD.indextmp1 ON NSSD.ns_outage_history_temp (...
+                          ^
+2015-12-14 16:29:22 ERROR  : ERROR:  relation "ns_ge_learning_stg" already exists
+2015-12-14 16:38:15 ERROR  : ERROR:  relation "ns_eval_rating_attribute" already exists
+2015-12-15 12:55:29 ERROR  : ERROR:  type "nssd.ns_class_obj[]" does not exist
+2015-12-15 13:15:00 ERROR  : ERROR:  type "ns_error_log_arr" already exists
+2015-12-15 16:02:20 ERROR  : ERROR:  type "ns_varchar_array[]" does not exist
+2015-12-15 16:10:24 ERROR  : ERROR:  type "nssd.ns_user_mgmt_obj[]" does not exist
+2015-12-15 16:43:49 ERROR  : ERROR:  type "ns_org_role_ws_obj[]" does not exist
+2015-12-15 16:44:23 ERROR  : ERROR:  type "ns_org_role_ws_obj[]" does not exist
+2015-12-15 17:08:38 ERROR  : ERROR:  type "nssd.ns_site_master_obj[]" does not exist
+2015-12-16 16:13:14 ERROR  : ERROR:  type "number" does not exist
+2015-12-16 16:27:14 ERROR  : ERROR:  type "nssd.ns_lnk_coursenum_obj[]" does not exist
+2015-12-16 16:40:01 ERROR  : ERROR:  type "ns_resource_schd_arr" already exists
+2015-12-16 17:13:50 ERROR  : ERROR:  type "ns_resource_visa_obj" already exists
+2015-12-16 17:14:26 ERROR  : ERROR:  type "ns_res_site_note_arr" already exists
+2015-12-16 17:32:30 ERROR  : ERROR:  type "ns_role_to_course_obj[]" does not exist
+2015-12-16 17:34:51 ERROR  : ERROR:  syntax error at or near "ALTER"
+LINE 41:  ALTER TYPE      NS_RESOURCE_MASTER_OBJ ADD ATTRIBUTE (SUB_B...
+          ^
+2015-12-18 10:29:02 ERROR  : ERROR:  syntax error at or near "ALTER"
+LINE 41:  ALTER TYPE   NSSD.NS_RESOURCE_MASTER_OBJ ADD ATTRIBUTE (SUB...
+          ^
+2015-12-18 12:13:39 ERROR  : ERROR:  type "ns_rating_attr_mapping_obj[]" does not exist
+2015-12-18 12:14:13 ERROR  : ERROR:  syntax error at or near "TE"
+LINE 1: TE TYPE NSSD.ns_rating_attr_mapping_arr AS (NS_RATING_ATTR_M...
+        ^
+2015-12-18 12:43:49 ERROR  : ERROR:  relation "ns_vendor_lookup" does not exist
+2015-12-18 12:44:17 ERROR  : ERROR:  relation "ns_vendor_lookup" does not exist
+2015-12-21 17:03:57 ERROR  : ERROR:  syntax error at or near "."
+LINE 1: CREATE UNIQUE INDEX NSSD.NS_VENDOR_PK ON NSSD.NS_VENDOR_LOOK...
+                                ^
+2015-12-21 17:09:39 ERROR  : ERROR:  relation "ns_res_course_assign_stg" already exists
+2015-12-21 17:13:50 ERROR  : ERROR:  relation "ns_res_course_assign_stg" already exists
+2015-12-22 13:23:53 ERROR  : ERROR:  relation "ns_role_to_resource_mappi_pk" already exists
+2015-12-22 13:24:06 ERROR  : ERROR:  relation "ns_role_to_resource_mappi_uk1" already exists
+2015-12-22 15:29:33 ERROR  : ERROR:  relation "ns_report_master_pk" already exists
+2015-12-22 15:30:48 ERROR  : ERROR:  relation "nssd.ns_outage_mobilzation_mv" does not exist
+2015-12-22 15:32:28 ERROR  : ERROR:  relation "nssd.ns_outage_mobilzation_mv" does not exist
+2015-12-22 15:36:26 ERROR  : ERROR:  relation "indextmp1" already exists
+2015-12-22 15:37:11 ERROR  : ERROR:  relation "index1" already exists
+2015-12-22 15:39:31 ERROR  : ERROR:  relation "ns_ge_learning_idx" already exists
+2015-12-22 15:41:21 ERROR  : ERROR:  relation "ns_ge_learning_idx" already exists
+2015-12-22 15:41:35 ERROR  : ERROR:  relation "ns_exp_status_type_unq_nm" already exists
+2015-12-22 15:42:58 ERROR  : ERROR:  relation "ns_exp_status_type_unq_nm" already exists
+2015-12-22 15:50:09 ERROR  : ERROR:  relation "ns_class_master_uq" already exists
+2015-12-22 16:21:58 ERROR  : ERROR:  unterminated dollar-quoted string at or near "$body$
+DECLARE
+
+    V_LOOKUP_VALUE  NS_LOOKUP_TABLE.LOOKUP_VALUE%TYPE;
+
+
+BEGIN
+
+    BEGIN
+      SELECT LOOKUP_VALUE
+        INTO STRICT  V_LOOKUP_VALUE
+        FROM NS_LOOKUP_TABLE
+       WHERE LOOKUP_ID = P_IN_LOOKUP_CODE
+         AND UPPER(LOOKUP_CATEGORY) = UPPER(P_IN_LOOKUP_CATEGORY)
+         AND ISACTIVE = 'Y';
+     EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            --V_LOOKUP_VALUE := 'Lookup Value Not Found for Type/Code: '||nvl(P_IN_LOOKUP_CATEGORY,'null')||'/'||nvl(P_IN_LOOKUP_CODE,'null');
+            V_LOOKUP_VALUE := '';
+        WHEN OTHERS THEN
+            V_LOOKUP_VALUE := 'ERROR getting value for Type/Code: '||coalesce(P_IN_LOOKUP_CATEGORY,'null')||'/'||coalesce(P_IN_LOOKUP_CODE,'null');
+    END;
+    RETURN V_LOOKUP_VALUE;
+
+END;
+"
+LINE 1: ...text, P_IN_LOOKUP_CATEGORY text )  RETURNS varchar AS $body$
+                                                                 ^
+2015-12-23 10:40:01 ERROR  : ERROR:  invalid type name "NS_LOOKUP_TABLE.LOOKUP_VALUE%TYPE"
+LINE 4:     V_LOOKUP_VALUE  NS_LOOKUP_TABLE.LOOKUP_VALUE%TYPE;
+                            ^
+2015-12-23 15:31:59 ERROR  : ERROR:  invalid type name "NS_LOOKUP_TABLE.LOOKUP_VALUE%TYPE"
+LINE 4:     V_LOOKUP_VALUE  NS_LOOKUP_TABLE.LOOKUP_VALUE%TYPE;
+                            ^
+2015-12-23 16:07:08 ERROR  : ERROR:  invalid type name "REFCUR REFCURSOR"
+LINE 6:  TYPE REFCUR REFCURSOR;
+              ^
+2015-12-23 16:13:47 ERROR  : ERROR:  invalid type name "REFCUR REFCURSOR"
+LINE 6:   TYPE REFCUR REFCURSOR;
+               ^
+2015-12-23 16:14:38 ERROR  : ERROR:  subquery in FROM must have an alias
+LINE 20:     FROM (SELECT DISTINCT PROJECT_DESC
+                  ^
+HINT:  For example, FROM (SELECT ...) [AS] foo.
+2015-12-23 16:45:04 ERROR  : ERROR:  syntax error at or near "CONNECT"
+LINE 10:             CONNECT BY LEVEL <=
+                     ^
+2015-12-28 15:27:30 ERROR  : ERROR:  invalid type name "REFCUR REFCURSOR"
+LINE 6:  TYPE REFCUR REFCURSOR;
+              ^
+2015-12-28 15:59:12 ERROR  : ERROR:  invalid type name "REFCURSOR REFCUR"
+LINE 6:  TYPE REFCURSOR REFCUR;
+              ^
+2015-12-28 16:34:31 ERROR  : ERROR:  type "refcur" does not exist
+LINE 7:  CURR REFCUR;
+              ^
+2015-12-28 16:36:09 ERROR  : ERROR:  invalid type name "NS_ROLE_MASTER.ROLE_NAME%TYPE"
+LINE 7:  V_TEMP_ROLE_ID NS_ROLE_MASTER.ROLE_NAME%TYPE;
+                        ^
+2015-12-29 11:06:57 ERROR  : ERROR:  invalid type name "NS_ROLE_MASTER.ROLE_NAME%TYPE"
+LINE 7:  V_TEMP_ROLE_ID NS_ROLE_MASTER.ROLE_NAME%TYPE;
+                        ^
+2015-12-29 11:09:24 ERROR  : ERROR:  syntax error at or near "V_QUERY"
+LINE 38:   OPEN CURR FOR V_QUERY;
+                         ^
+2015-12-29 11:52:33 ERROR  : ERROR:  syntax error at or near "V_QUERY"
+LINE 38:   OPEN CURR FOR V_QUERY;
+                         ^
+2015-12-29 12:03:17 ERROR  : ERROR:  syntax error at or near "V_QUERY"
+LINE 38:   OPEN CURR FOR V_QUERY;
+                         ^
+2015-12-29 12:42:07 ERROR  : ERROR:  syntax error at or near "V_QUERY"
+LINE 38:   OPEN CURR FOR V_QUERY;
+                         ^
+2015-12-29 12:47:11 ERROR  : ERROR:  syntax error at or near "V_QUERY"
+LINE 38:   OPEN CURR FOR V_QUERY;
+                         ^
+2015-12-29 16:17:27 ERROR  : ERROR:  type refcur does not exist
+2015-12-29 16:17:37 ERROR  : ERROR:  type refcur does not exist
+2015-12-29 16:17:49 ERROR  : ERROR:  type refcur does not exist
+2015-12-29 16:18:17 ERROR  : ERROR:  type refcur does not exist
+2015-12-29 16:19:05 ERROR  : ERROR:  type refcur does not exist
+2015-12-29 16:38:52 ERROR  : ERROR:  type refcur does not exist
+2015-12-29 16:39:52 ERROR  : ERROR:  syntax error at or near "SEARCH_QRY1"
+LINE 182:     OPEN P_OUT_USER_INFO FOR SEARCH_QRY1;
+                                       ^
+2016-01-05 14:55:01 ERROR  : ERROR:  invalid type name "NS_RESOURCE_COURSE_ASSIGN.COURSE_NUMBER%TYPE"
+LINE 7:  V_COURSE_NUM NS_RESOURCE_COURSE_ASSIGN.COURSE_NUMBER%TYPE;
+                      ^
+2016-01-05 14:55:24 ERROR  : ERROR:  syntax error at or near "V_QUERY"
+LINE 39:   OPEN CURR FOR V_QUERY;
+                         ^
+2016-01-05 14:56:19 ERROR  : ERROR:  syntax error at or near "''"
+LINE 39:   OPEN CURR FOR ''+ V_QUERY;
+                         ^
+2016-01-06 11:16:23 ERROR  : ERROR:  syntax error at or near "V_QUERY"
+LINE 21:     V_QUERY || ' AND UPPER(NS_EXP_RECORD_TYPE.EXP_RECORD_NAM...
+             ^
+2016-01-07 16:46:27 ERROR  : ERROR:  schema "ns_admin_pkg" does not exist
+2016-01-07 16:46:52 ERROR  : ERROR:  type refcur does not exist
+2016-01-07 16:47:17 ERROR  : ERROR:  type refcur does not exist
+2016-01-07 16:47:38 ERROR  : ERROR:  syntax error at or near "SEARCH_QRY1"
+LINE 183:     OPEN P_OUT_USER_INFO FOR SEARCH_QRY1;
+                                       ^
+2016-01-07 16:54:47 ERROR  : ERROR:  type refcur does not exist
+2016-01-07 16:57:30 ERROR  : ERROR:  type refcur does not exist
+2016-01-08 09:28:07 ERROR  : ERROR:  type refcur does not exist
+2016-01-08 16:11:58 ERROR  : ERROR:  type refcur does not exist
+2016-01-08 16:12:42 ERROR  : ERROR:  syntax error at or near "SEARCH_QRY1"
+LINE 183:     OPEN P_OUT_USER_INFO FOR SEARCH_QRY1;
+                                       ^
+2016-01-11 08:26:19 ERROR  : ERROR:  syntax error at or near "."
+LINE 27: ...      v_table_name := coalesce(P_IN_USER_OBJ(indx).TABLE_NAM...
+                                                              ^
+2016-01-11 08:46:18 ERROR  : ERROR:  syntax error at or near "."
+LINE 27: ...      v_table_name := coalesce(P_IN_USER_OBJ(indx).TABLE_NAM...
+                                                              ^
+2016-01-11 16:41:42 ERROR  : ERROR:  syntax error at or near "."
+LINE 31: ...      v_table_name := coalesce(P_IN_USER_OBJ(indx).TABLE_NAM...
+                                                              ^
+2016-01-11 17:44:13 ERROR  : ERROR:  syntax error at or near "."
+LINE 32:       v_access_id := coalesce(P_IN_USER_OBJ(indx).ACCESS_ID,...
+                                                          ^
+2016-01-11 17:46:15 ERROR  : ERROR:  syntax error at or near "."
+LINE 32:       v_access_id := coalesce(P_IN_USER_OBJ(indx).ACCESS_ID,...
+                                                          ^
+2016-01-11 17:53:41 ERROR  : ERROR:  type refcur does not exist
+2016-01-11 17:53:58 ERROR  : ERROR:  syntax error at or near ")"
+LINE 12:         where a.sso_id(+) = b.sso_id
+                                 ^
+2016-01-11 18:22:05 ERROR  : ERROR:  type refcur does not exist
+2016-01-11 18:23:56 ERROR  : ERROR:  syntax error at or near "PROCEDURE"
+LINE 1: PROCEDURE LOAD_BUSINESS_FROM_OHR(P_IN_SUB_BUSINESS        IN...
+        ^
+2016-01-11 18:29:02 ERROR  : ERROR:  syntax error at or near "IS"
+LINE 5: ...                  P_OUT_ERR_BUF             OUT VARCHAR2) IS
+                                                                     ^
+2016-01-11 18:31:32 ERROR  : ERROR:  syntax error at or near "."
+LINE 27: ...       WHERE COURSE_NUMBER = P_IN_COURSE_OBJ(indx).COURSE_NU...
+                                                              ^
+2016-01-12 11:58:20 ERROR  : ERROR:  syntax error at or near "."
+LINE 30:          WHERE CLASS_ID = P_IN_CLASS_OBJ(indx).CLASS_ID;
+                                                       ^
+2016-01-12 11:59:37 ERROR  : ERROR:  type refcur does not exist
+2016-01-12 12:00:03 ERROR  : ERROR:  syntax error at or near "day"
+LINE 51:                   ' AND ( date_trunc('day', A.CLASS_START_DA...
+                                               ^
+2016-01-12 12:29:23 ERROR  : ERROR:  type refcur does not exist
+2016-01-12 12:29:43 ERROR  : ERROR:  syntax error at or near "SEARCH_QRY"
+LINE 67:     OPEN P_OUT_COURSE_INFO FOR SEARCH_QRY;
+                                        ^
+2016-01-12 12:31:48 ERROR  : ERROR:  type refcur does not exist
+2016-01-12 13:18:37 ERROR  : ERROR:  syntax error at or near "SEARCH_QRY"
+LINE 31:     OPEN P_OUT_ACTIVITES_INFO FOR SEARCH_QRY;
+                                           ^
+2016-01-12 13:18:54 ERROR  : ERROR:  syntax error at or near ")"
+LINE 38:        WHERE G.EXP_RECORD_ID = E.EXP_RECORD_ID(+)
+                                                         ^
+2016-01-12 13:35:35 ERROR  : ERROR:  syntax error at or near "."
+LINE 21:            .EXP_RECORD_ID IS NOT NULL AND P_IN_RECORD_OBJ(in...
+                    ^
+2016-01-12 13:37:27 ERROR  : ERROR:  syntax error at or near "."
+LINE 22:            .EXP_GROUP_ID IS NOT NULL AND P_IN_GROUP_OBJ(indx...
+                    ^
+2016-01-12 13:39:33 ERROR  : ERROR:  syntax error at or near "."
+LINE 22:            .EXP_ACT_ID IS NOT NULL AND P_IN_ACTIVITY_OBJ(ind...
+                    ^
+2016-01-12 13:41:12 ERROR  : ERROR:  syntax error at or near "SEARCH_QRY"
+LINE 47:   OPEN P_OUT_USER_ROLE FOR SEARCH_QRY;
+                                    ^
+2016-01-12 13:45:54 ERROR  : ERROR:  type nssd.ns_report_res_arr does not exist
+2016-01-12 13:57:12 ERROR  : ERROR:  type "ns_role_obj" already exists
+2016-01-12 13:57:28 ERROR  : ERROR:  type nssd.ns_report_res_arr does not exist
+2016-01-12 13:58:45 ERROR  : ERROR:  syntax error at or near "."
+LINE 26:              .Sso_Id Is Not Null And P_In_Report_Res_Obj(Ind...
+                      ^
+2016-01-12 14:14:52 ERROR  : ERROR:  error de sintaxis en o cerca de «(»
+LINE 21:   SUB_BUSINESS_ID     bigint(10),
+                                     ^
+2016-01-12 14:18:55 ERROR  : ERROR:  error de sintaxis en o cerca de «ALTER»
+LINE 97:  ALTER TYPE      NS_RESOURCE_MASTER_OBJ ADD ATTRIBUTE (SUB_B...
+          ^
+2016-01-12 14:45:27 ERROR  : ERROR:  ya existe un tipo «ns_outage_history_ws_arr»
+2016-01-12 14:51:18 ERROR  : ERROR:  syntax error at or near "SEARCH_QRY"
+LINE 20:     OPEN P_OUT_USER_ROLE FOR SEARCH_QRY;
+                                      ^
+2016-01-12 15:28:05 ERROR  : ERROR:  syntax error at or near "max"
+LINE 22: ...ax(Course_Number), 0, regexp_POSITION('[1-9]+' in max(Course...
+                                                              ^
+2016-01-12 15:34:18 ERROR  : ERROR:  syntax error at or near "Max"
+LINE 22: ...ax(Course_Number), 0, regexp_POSITION('[1-9]+' in Max(Course...
+                                                              ^
+2016-01-14 09:18:06 ERROR  : server closed the connection unexpectedly
+	This probably means the server terminated abnormally
+	before or while processing the request.
+2016-01-14 11:18:40 ERROR  : ERROR:  no existe el tipo refcur
+2016-01-14 11:19:30 ERROR  : ERROR:  error de sintaxis en o cerca de «SEARCH_QRY»
+LINE 92:      OPEN P_OUT_RESOURCE_INFO FOR  SEARCH_QRY || COND_QRY ||...
+                                            ^
+2016-01-28 17:34:22 ERROR  : ERROR:  syntax error at or near "Sweden"
+LINE 137: ...',NULL,E'0',E'Studiegr寤 8, 904 33',NULL,E'Ume姬E'Sweden',E'...
+                                                               ^
+2016-02-10 09:59:20 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "postgres"
+
+2016-02-10 17:05:37 ERROR  : ERROR:  relation "ns_resource_profile_info" does not exist
+LINE 1: SELECT * FROM NS_RESOURCE_PROFILE_INFO WHERE SSO_ID = '27204...
+                      ^
+2016-02-10 17:13:28 ERROR  : ERROR:  column "geh" does not exist
+LINE 1: ...LECT * FROM NSSD.NS_RESOURCE_PROFILE_INFO WHERE employer=GEH
+                                                                    ^
+2016-02-11 12:08:29 ERROR  : ERROR:  operator does not exist: character varying = integer
+LINE 4: WHERE SSO_ID = 204001113;
+                     ^
+HINT:  No operator matches the given name and argument type(s). You might need to add explicit type casts.
+2016-02-11 12:28:51 ERROR  : ERROR:  function ns_resource_pkg.search_resource_info(unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown) does not exist
+LINE 1: SELECT * from NS_RESOURCE_PKG.search_resource_info('20400117...
+                      ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2016-02-11 12:32:14 ERROR  : ERROR:  function ns_resource_pkg.search_resource_info(unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown) does not exist
+LINE 1: SELECT * from NS_RESOURCE_PKG.search_resource_info('20400117...
+                      ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2016-02-11 12:32:31 ERROR  : ERROR:  function ns_resource_pkg.search_resource_info(unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown) does not exist
+LINE 1: SELECT * from NS_RESOURCE_PKG.search_resource_info('20400117...
+                      ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2016-02-11 13:05:17 ERROR  : ERROR:  function ns_resource_pkg.search_resource_info(unknown, unknown, unknown, unknown, unknown, unknown, unknown, unknown, integer) does not exist
+LINE 1: SELECT ns_resource_pkg.search_resource_info(
+               ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2016-02-12 17:16:28 ERROR  : ERROR:  syntax error at or near "PERFORM"
+LINE 1: PERFORM * from (
+        ^
+2016-02-12 17:17:04 ERROR  : ERROR:  syntax error at or near "RESOURCE_TYPE"
+LINE 3: ...                  GET_LOOKUP_VALUE(PERSON_TYPE, ''RESOURCE_T...
+                                                             ^
+2016-02-12 17:18:28 ERROR  : ERROR:  syntax error at or near "="
+LINE 11:                     AND SSO_ID LIKE = '204001170%'
+                                             ^
+2016-02-12 17:18:48 ERROR  : ERROR:  subquery in FROM must have an alias
+LINE 1: select * from (
+                      ^
+HINT:  For example, FROM (SELECT ...) [AS] foo.
