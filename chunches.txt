@@ -1,0 +1,89 @@
+CREATE OR REPLACE FUNCTION NSSD.ns_get_exp_act_pivot (V_PIVOT_REC_COND text, V_PIVOT_ACT_COND text,V_PIVOT_ACT_VALUE text, V_PIVOT_REC_VALUE text, V_REC_COL_NAME text,V_ACT_COL_NAME text)  RETURNS text AS $body$
+DECLARE
+
+
+ V_EXP_ACTIVITIES text := '';
+ V_QUERY text := '';
+ V_FILTER_COND varchar(500) := '';
+ V_CONTAINS_COND text := '';
+ CURR REFCURSOR;
+ V_EXP_ACTIVITY NSSD.NS_EXP_ACTIVITIES.EXP_ACT_NAME%TYPE;
+
+
+BEGIN
+
+ V_QUERY := ' PERFORM MIN(EXP_ACT_ID)
+  FROM NS_EXP_ACTIVITIES,NS_EXP_RECORD_TYPE,NS_EXP_GROUP_MASTER
+  WHERE NS_EXP_RECORD_TYPE.EXP_RECORD_ID = NS_EXP_GROUP_MASTER.EXP_RECORD_ID
+  AND NS_EXP_GROUP_MASTER.EXP_GROUP_ID = NS_EXP_ACTIVITIES.EXP_GROUP_ID
+  AND NS_EXP_RECORD_TYPE.ISACTIVE=''Y'' AND NS_EXP_GROUP_MASTER.ISACTIVE=''Y''
+  AND (NS_EXP_ACTIVITIES.ISACTIVE=''Y'' OR NS_EXP_ACTIVITIES.DISPLAY_ON_WEB =''Y'')' ;
+
+  IF V_REC_COL_NAME IS NOT NULL THEN
+    IF V_PIVOT_REC_COND IN ('IN','NOT IN') THEN
+      SELECT CASE WHEN V_PIVOT_REC_COND='IN' THEN 'LIKE' WHEN V_PIVOT_REC_COND='NOT IN' THEN 'NOT LIKE'  ELSE V_PIVOT_REC_COND END
+        INTO V_FILTER_COND
+        ;
+
+       SELECT NS_SPLIT_BY_COMMA(UPPER(TRIM(V_PIVOT_REC_VALUE)),
+                                UPPER(V_REC_COL_NAME),
+                                V_FILTER_COND)
+         INTO V_CONTAINS_COND
+         ;
+
+        V_QUERY := V_QUERY || ' AND ' || V_CONTAINS_COND;
+    ELSE
+        V_QUERY := V_QUERY || ' AND UPPER(NS_EXP_RECORD_TYPE.EXP_RECORD_NAME) ' || V_PIVOT_REC_COND || '
+        ''%'|| UPPER(TRIM(V_PIVOT_REC_VALUE)) ||'%''';
+    END IF;
+  END IF;
+
+  IF V_ACT_COL_NAME IS NOT NULL THEN
+    IF V_PIVOT_ACT_COND IN ('IN','NOT IN') THEN
+      SELECT CASE WHEN V_PIVOT_REC_COND='IN' THEN 'LIKE' WHEN V_PIVOT_REC_COND='NOT IN' THEN 'NOT LIKE'  ELSE V_PIVOT_REC_COND END
+        INTO V_FILTER_COND
+        ;
+
+       SELECT NS_SPLIT_BY_COMMA(UPPER(TRIM(V_PIVOT_ACT_VALUE)),
+                                UPPER(V_ACT_COL_NAME),
+                                V_FILTER_COND)
+         INTO V_CONTAINS_COND
+         ;
+
+        V_QUERY := V_QUERY || ' AND ' || V_CONTAINS_COND;
+    ELSE
+        V_QUERY := V_QUERY || ' AND UPPER(NS_EXP_ACTIVITIES.EXP_ACT_NAME) ' || V_PIVOT_ACT_COND || '
+        ''%'|| UPPER(TRIM(V_PIVOT_ACT_VALUE)) ||'%''';
+    END IF;
+  END IF;
+
+  V_QUERY := V_QUERY || ' GROUP BY UPPER(TRIM(EXP_ACT_NAME)) ORDER BY 1';
+
+  OPEN CURR FOR EXECUTE V_QUERY;
+  LOOP
+   FETCH CURR INTO V_EXP_ACTIVITY;
+   IF NOT FOUND THEN EXIT; END IF; -- apply on CURR
+   V_EXP_ACTIVITIES := V_EXP_ACTIVITIES || '''' || REPLACE(V_EXP_ACTIVITY,'''','') || ''',';
+
+  END LOOP;
+
+  IF(LENGTH(V_EXP_ACTIVITIES) !=0 )  THEN
+    V_EXP_ACTIVITIES := SUBSTR(V_EXP_ACTIVITIES,0,LENGTH(V_EXP_ACTIVITIES)-1);
+  END IF;
+RETURN V_EXP_ACTIVITIES;
+END;
+$body$
+LANGUAGE PLPGSQL
+SECURITY DEFINER
+;
+
+
+
+    
+Con respecto al objetivo del VOC se vio superado debido al feedback que me daban constantemente en el proyecto de ServiceMax, Con respecto a las capacitaciones se cumplieron los objetivos y se tomaron un par de cursos mas de los marcados.
+
+Adaptabilidad y rápido entendimiento de las diferentes tecnologias que se han usado a lo largo de ambos proyectos, disponibilidad para ayudar a quien lo necesite, compromiso con el cliente
+
+Mejorar el conocimiento con respecto al stack tecnologico que se ha estado usando, puntualidad 
+
+Dominar el stack y poder contribuir de mejor manera a los proyectos, estimando mejor y aportando valor a las aplicaciones que se desarrollen      
